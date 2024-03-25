@@ -1,3 +1,4 @@
+"use client";
 import axiosInstance from "@/utils/axios";
 import { useRouter } from "next/navigation";
 import { GoPencil, GoTrash } from "react-icons/go";
