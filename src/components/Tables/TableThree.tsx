@@ -1,25 +1,13 @@
 "use client";
-import axiosInstance from "@/utils/axios";
-import { useRouter } from "next/navigation";
-import { GoPencil, GoTrash } from "react-icons/go";
+import { redirect } from "next/navigation";
+import { GoPencil } from "react-icons/go";
+import DeleteNote from "../Note/DeleteNote";
 
 interface Props {
   data: any;
 }
 
 const TableThree = (props: Props) => {
-  const router = useRouter();
-
-  const onDelete = (id: number) => async () => {
-    const { data } = await axiosInstance.delete(`/note/${id}`, {
-      params: { id },
-    });
-    if (data) {
-      return router.push("/notes");
-    }
-    router.refresh();
-  };
-
   return (
     <div className="rounded-sm border border-stroke bg-white px-5 pb-2.5 pt-6 shadow-default dark:border-strokedark dark:bg-boxdark sm:px-7.5 xl:pb-1">
       <div className="max-w-full overflow-x-auto">
@@ -52,16 +40,11 @@ const TableThree = (props: Props) => {
                   <div className="flex items-center space-x-3.5">
                     <button
                       className="hover:text-primary"
-                      onClick={() => router.push(`/note/${item.id}`)}
+                      onClick={() => redirect(`/note/${item.id}`)}
                     >
                       <GoPencil />
                     </button>
-                    <button
-                      className="hover:text-primary"
-                      onClick={onDelete(item.id)}
-                    >
-                      <GoTrash />
-                    </button>
+                    <DeleteNote id={item.id} />
                   </div>
                 </td>
               </tr>

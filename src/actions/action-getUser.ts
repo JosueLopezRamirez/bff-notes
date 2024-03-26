@@ -1,9 +1,8 @@
 "use server";
 
 import axiosInstance from "@/utils/axios";
-import { redirect } from "next/navigation";
 
-export async function getUser() {
+export const getUser = async () => {
     const data = await axiosInstance.get("/user");
     return data;
 }
