@@ -1,41 +1,18 @@
-"use client";
-import { useEffect, useState } from "react";
 import TableThree from "@/components/Tables/TableThree";
 
 import DefaultLayout from "@/components/Layouts/DefaultLayout";
-import axiosInstance from "@/utils/axios";
-import axios from "axios";
-import { useRouter } from "next/navigation";
+import { redirect } from "next/navigation";
+import { getNotes } from "@/actions/action-getNotes";
+import { getUser } from "@/actions/action-getUser";
 
-interface NoteI {
-  id: number;
-  note: string;
-}
+const TablesPage = async () => {
+  const user = await getUser();
 
-interface Props {
-  notes: NoteI[];
-}
+  if (!user) {
+    return redirect("/auth/signin");
+  }
 
-const TablesPage = () => {
-  const router = useRouter();
-  const [notes, setNotes] = useState([]);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const { data } = await axiosInstance.get("/notes");
-      setNotes(data);
-    };
-    getUser();
-    fetchData();
-  }, []);
-
-  const getUser = async () => {
-    const data = await axiosInstance.get("/user");
-    if (!data) {
-      router.push("/auth/signin");
-    }
-    return data;
-  };
+  const { notes } = await getNotes();
 
   return (
     <DefaultLayout>

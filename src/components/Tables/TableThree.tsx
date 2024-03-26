@@ -4,7 +4,7 @@ import { useRouter } from "next/navigation";
 import { GoPencil, GoTrash } from "react-icons/go";
 
 interface Props {
-  data: any[];
+  data: any;
 }
 
 const TableThree = (props: Props) => {
@@ -38,7 +38,7 @@ const TableThree = (props: Props) => {
             </tr>
           </thead>
           <tbody>
-            {(props.data || []).map((item, key) => (
+            {(props.data || [])?.map((item: any, key: any) => (
               <tr key={key}>
                 <td className="border-b border-[#eee] px-4 py-5 pl-9 dark:border-strokedark xl:pl-11">
                   <h5 className="font-medium text-black dark:text-white">
