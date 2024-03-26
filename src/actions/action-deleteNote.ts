@@ -2,12 +2,11 @@
 
 import axiosInstance from "@/utils/axios";
 
-export const onDelete = async (prevState, formData: FormData) => {
+export const onDelete = async (prevState: any, formData: FormData) => {
   const id = formData.get("id");
 
-  const data = await axiosInstance.delete(`/note/${id}`, {
+  const { data } = await axiosInstance.delete<any>(`/note/${id}`, {
     params: { id },
   });
-  console.log({ data });
-  return { isDeleted: data.deleted };
+  return { isDeleted: data };
 };

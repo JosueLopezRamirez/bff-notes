@@ -23,7 +23,7 @@ export async function DELETE(request: Request) {
 
         const { status } = await supabase.from("notes").delete().match({ id: parseInt(id as string) });
         console.log('Delete', { status });
-        return NextResponse.json({ deleted: true }, { status: 200 });
+        return NextResponse.json({ data: true }, { status: 200 });
     } catch (error) {
         console.log('Delete', { error })
     }
